@@ -1,0 +1,37 @@
+<%= form_with(model: bicho, local: true) do |form| %>
+  <% if bicho.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bicho.errors.count, "error") %> prohibited this bicho from being saved:</h2>
+
+      <ul>
+        <% bicho.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+  <%= form.label :ambiente %>
+  <%= collection_select(:bicho, :ambiente_id, Ambiente.all, :id, :nome) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nome %>
+    <%= form.text_field :nome %>
+  </div>
+
+  <div class="field">
+    <%= form.label :alimentacao %>
+    <%= form.text_field :alimentacao %>
+  </div>
+
+  <div class="field">
+  <%= form.label :tipo %>
+  <%= collection_check_boxes(:bicho, :tipo_ids, Tipo.all, :id, :nome) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
